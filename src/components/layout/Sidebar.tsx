@@ -6,7 +6,8 @@ import {
   Calendar, 
   FolderOpen,
   Settings,
-  Plus
+  Plus,
+  Zap
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -22,6 +23,7 @@ const menuItems = [
   { id: 'gantt', label: 'Gantt', icon: Calendar },
   { id: 'forms', label: 'Forms', icon: FileText },
   { id: 'reports', label: 'Reports', icon: BarChart3 },
+  { id: 'automation', label: 'Automation', icon: Zap },
   { id: 'workspaces', label: 'Workspaces', icon: FolderOpen },
   { id: 'settings', label: 'Settings', icon: Settings },
 ]

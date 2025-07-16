@@ -9,6 +9,7 @@ import { Forms } from '@/components/forms/Forms'
 import { Reports } from '@/components/reports/Reports'
 import { Workspaces } from '@/components/workspaces/Workspaces'
 import { Settings } from '@/components/settings/Settings'
+import { AutomationWorkflows } from '@/components/automation/AutomationWorkflows'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -65,6 +66,8 @@ function App() {
         return <Reports />
       case 'workspaces':
         return <Workspaces />
+      case 'automation':
+        return <AutomationWorkflows />
       case 'settings':
         return <Settings />
       default:

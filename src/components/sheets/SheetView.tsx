@@ -11,16 +11,21 @@ import {
 import { 
   Plus, 
   Filter, 
-  Sort, 
   Share, 
   Download, 
   MoreHorizontal,
   ChevronDown,
   Users,
-  Save
+  Save,
+  Upload,
+  Zap,
+  MessageCircle
 } from 'lucide-react'
 import { SpreadsheetGrid } from './SpreadsheetGrid'
 import { ColumnManager } from './ColumnManager'
+import { FilterSortPanel } from './FilterSortPanel'
+import { ImportExport } from './ImportExport'
+import { CommentsAttachments } from './CommentsAttachments'
 import { blink } from '@/lib/blink'
 
 interface Column {
@@ -85,11 +90,15 @@ export function SheetView() {
   const [selectedCell, setSelectedCell] = useState<{ rowId: string; columnId: string } | null>(null)
   const [editingCell, setEditingCell] = useState<{ rowId: string; columnId: string } | null>(null)
   const [showColumnManager, setShowColumnManager] = useState(false)
+  const [filters, setFilters] = useState<any[]>([])
+  const [sorts, setSorts] = useState<any[]>([])
   const [collaborators] = useState([
     { id: '1', name: 'John Doe', avatar: '/avatars/john.jpg', online: true },
     { id: '2', name: 'Sarah Wilson', avatar: '/avatars/sarah.jpg', online: true },
     { id: '3', name: 'Mike Johnson', avatar: '/avatars/mike.jpg', online: false }
   ])
+  const [comments] = useState<any[]>([])
+  const [attachments] = useState<any[]>([])
 
   const addRow = () => {
     const newRow: Row = {
@@ -144,17 +153,25 @@ export function SheetView() {
           </div>
           
           <div className="flex items-center space-x-2">
+            <FilterSortPanel
+              columns={columns}
+              filters={filters}
+              sorts={sorts}
+              onFiltersChange={setFilters}
+              onSortsChange={setSorts}
+              onApply={() => {
+                // Apply filters and sorts
+                console.log('Applying filters and sorts', { filters, sorts })
+              }}
+              onClear={() => {
+                setFilters([])
+                setSorts([])
+              }}
+            />
+            <ImportExport />
             <Button variant="outline" size="sm">
-              <Filter className="h-4 w-4 mr-2" />
-              Filter
-            </Button>
-            <Button variant="outline" size="sm">
-              <Sort className="h-4 w-4 mr-2" />
-              Sort
-            </Button>
-            <Button variant="outline" size="sm">
-              <Download className="h-4 w-4 mr-2" />
-              Export
+              <Zap className="h-4 w-4 mr-2" />
+              Automate
             </Button>
             <Button size="sm">
               <Save className="h-4 w-4 mr-2" />
